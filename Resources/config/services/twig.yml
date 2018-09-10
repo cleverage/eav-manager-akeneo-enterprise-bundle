@@ -1,0 +1,4 @@
+services:
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Twig\AkeneoEnterpriseExtension:
+        tags:
+            - { name: twig.extension }

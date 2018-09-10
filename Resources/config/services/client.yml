@@ -1,0 +1,9 @@
+parameters:
+    eav_manager.akeneo.client_builder.class: CleverAge\EAVManager\AkeneoEnterpriseBundle\ApiClient\AkeneoPimEnterpriseClientBuilder
+    eav_manager.akeneo.default_client.class: Akeneo\PimEnterprise\ApiClient\AkeneoPimEnterpriseClientInterface
+    eav_manager.akeneo.client_registry.class: CleverAge\EAVManager\AkeneoEnterpriseBundle\ApiClient\AkeneoPimEnterpriseClientRegistry
+    eav_manager.akeneo.client.class: CleverAge\EAVManager\AkeneoEnterpriseBundle\ApiClient\AkeneoPimEnterpriseClient
+
+services:
+    Akeneo\PimEnterprise\ApiClient\AkeneoPimEnterpriseClientInterface:
+        alias: Akeneo\Pim\ApiClient\AkeneoPimClientInterface

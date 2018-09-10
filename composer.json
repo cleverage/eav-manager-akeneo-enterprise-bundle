@@ -1,0 +1,46 @@
+{
+  "name": "cleverage/eav-manager-akeneo-enterprise-bundle",
+  "description": "Interface to interact with Akeneo enterprise by the Clever Data Manager and Akeneo API",
+  "keywords": [
+    "eav-manager",
+    "akeneo ee",
+    "client",
+    "api"
+  ],
+  "homepage": "https://github.com/cleverage/eav-manager-akeneo-enterprise-bundle",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vincent Chalnot",
+      "email": "vchalnot@clever-age.com",
+      "homepage": "http://chalnot.fr",
+      "role": "Lead Developer"
+    },
+    {
+      "name": "Fabien Salles",
+      "email": "fsalles@clever-age.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CleverAge\\EAVManager\\AkeneoEnterpriseBundle\\": ""
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "cleverage/eav-manager-akeneo-product-bundle": "^1.0",
+    "akeneo/api-php-client-ee": "^1.0",
+    "php-http/client-implementation": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.4",
+    "php-http/guzzle6-adapter": "^1.1"
+  },
+  "suggest": {
+    "php-http/guzzle6-adapter": "In order to use Guzzle v6 as the HTTP client"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

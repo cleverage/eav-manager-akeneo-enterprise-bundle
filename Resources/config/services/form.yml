@@ -1,0 +1,15 @@
+parameters:
+    eav_manager.akeneo.form.type.product.class: CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AkeneoProductType
+
+services:
+    eav_manager.akeneo.form.type.product:
+            class: '%eav_manager.akeneo.form.type.product.class%'
+            arguments:
+                - '@Akeneo\Pim\ApiClient\AkeneoPimClientInterface'
+                - '@CleverAge\EAVManager\AkeneoProductBundle\Form\Transformer\AkeneoProductTransformer'
+                - '@form.registry'
+                - '@security.authorization_checker'
+            calls:
+                - [setCache, ['@eav_manager.akeneo.api.cache']]
+            tags:
+                - { name: form.type }

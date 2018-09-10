@@ -1,0 +1,5 @@
+services:
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Security\Voter\ProductVoter:
+        arguments: ['%eav_manager_akeneo_product_owners%']
+        tags:
+            - { name: security.voter }

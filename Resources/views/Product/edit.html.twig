@@ -1,0 +1,38 @@
+{% extends '@CleverAgeEAVManagerAkeneoProduct/Product/edit.html.twig' %}
+
+{% block form_actions %}
+    {% set backAction = admin.option('allow_back')|default(not isAjax) %}
+    <div class="btn-group pull-right">
+        {{ block('back_button') }}
+        {{ block('proposal_button') }}
+        {{ block('submit_button') }}
+        {% if data|default(false) %}
+            {{ block('secondary_actions_button') }}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block proposal_button %}
+    {% if form.proposal is defined %}
+        {% set class = 'btn' %}
+        {% set label = tryTrans([admin_trans_key ~ 'submit_for_validation.label', 'admin.action.submit_for_validation.label'], [], 'Submit for validation') %}
+
+        {% if data.metadata.workflow_status == Status.DRAFT_IN_PROGRESS %}
+            {% set class = class ~ ' btn-success' %}
+        {% elseif data.metadata.workflow_status == Status.WAITING_FOR_APPROVAL %}
+            {% set class = class ~ ' btn-default disabled' %}
+            {% set label = tryTrans([admin_trans_key ~ 'submitted_to_validation.label', 'admin.action.submitted_to_validation.label'], [], 'Submitted to validation') %}
+        {% else %}
+            {% set class = class ~ ' hide' %}
+        {% endif %}
+
+        {% if form.proposal.rendered %}
+            <button type="submit" id="{{ form.proposal.vars.id }}" name="{{ form.proposal.vars.full_name }}" class="{{ class }}">
+                {{ label }}
+            </button>
+        {% else %}
+            {{ form_widget(form.proposal, { 'label' : label, 'attr': {'class': class }}) }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
