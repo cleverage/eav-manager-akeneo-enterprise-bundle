@@ -31,7 +31,7 @@
   "require": {
     "php": ">=7.1",
     "cleverage/eav-manager-akeneo-product-bundle": "^1.0",
-    "akeneo/api-php-client-ee": "^1.0",
+    "akeneo/api-php-client-ee": "^3.0",
     "php-http/client-implementation": "^1.0"
   },
   "require-dev": {
