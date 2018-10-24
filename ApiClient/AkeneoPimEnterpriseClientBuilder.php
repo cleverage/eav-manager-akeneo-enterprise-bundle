@@ -10,7 +10,13 @@ use Akeneo\Pim\ApiClient\Api\ProductApi;
 use Akeneo\Pim\ApiClient\Api\ProductMediaFileApi;
 use Akeneo\Pim\ApiClient\Api\ProductModelApi;
 use Akeneo\Pim\ApiClient\Security\Authentication;
+use Akeneo\PimEnterprise\ApiClient\Api\AssetApi;
+use Akeneo\PimEnterprise\ApiClient\Api\AssetCategoryApi;
+use Akeneo\PimEnterprise\ApiClient\Api\AssetReferenceFileApi;
+use Akeneo\PimEnterprise\ApiClient\Api\AssetTagApi;
+use Akeneo\PimEnterprise\ApiClient\Api\AssetVariationFileApi;
 use Akeneo\PimEnterprise\ApiClient\Api\ProductDraftApi;
+use Akeneo\PimEnterprise\ApiClient\Api\ProductModelDraftApi;
 use Akeneo\PimEnterprise\ApiClient\Api\PublishedProductApi;
 use CleverAge\EAVManager\AkeneoProductBundle\ApiClient\AkeneoPimClientBuilder;
 use CleverAge\EAVManager\AkeneoProductBundle\ApiClient\Api\AssociationTypeApi;
@@ -35,7 +41,7 @@ class AkeneoPimEnterpriseClientBuilder extends AkeneoPimClientBuilder
      */
     protected function buildAuthenticatedClient(Authentication $authentication)
     {
-        list($resourceClient, $pageFactory, $cursorFactory) = $this->setUp($authentication);
+        list($resourceClient, $pageFactory, $cursorFactory, $fileSystem) = $this->setUp($authentication);
 
         $client = new AkeneoPimEnterpriseClient(
             $authentication,
@@ -45,7 +51,7 @@ class AkeneoPimEnterpriseClientBuilder extends AkeneoPimClientBuilder
             $this->createApiWithCache(AttributeOptionApi::class, $resourceClient, $pageFactory, $cursorFactory),
             $this->createApiWithCache(AttributeGroupApi::class, $resourceClient, $pageFactory, $cursorFactory),
             $this->createApiWithCache(FamilyApi::class, $resourceClient, $pageFactory, $cursorFactory),
-            new ProductMediaFileApi($resourceClient, $pageFactory, $cursorFactory),
+            new ProductMediaFileApi($resourceClient, $pageFactory, $cursorFactory, $fileSystem),
             $this->createApiWithCache(LocaleApi::class, $resourceClient, $pageFactory, $cursorFactory),
             $this->createApiWithCache(ChannelApi::class, $resourceClient, $pageFactory, $cursorFactory),
             $this->createApiWithCache(CurrencyApi::class, $resourceClient, $pageFactory, $cursorFactory),
@@ -53,8 +59,14 @@ class AkeneoPimEnterpriseClientBuilder extends AkeneoPimClientBuilder
             $this->createApiWithCache(AssociationTypeApi::class, $resourceClient, $pageFactory, $cursorFactory),
             new FamilyVariantApi($resourceClient, $pageFactory, $cursorFactory),
             new ProductModelApi($resourceClient, $pageFactory, $cursorFactory),
+            new ProductModelDraftApi($resourceClient, $pageFactory, $cursorFactory),
             new PublishedProductApi($resourceClient, $pageFactory, $cursorFactory),
-            new ProductDraftApi($resourceClient, $pageFactory, $cursorFactory)
+            new ProductDraftApi($resourceClient, $pageFactory, $cursorFactory),
+            new AssetApi($resourceClient, $pageFactory, $cursorFactory),
+            new AssetCategoryApi($resourceClient, $pageFactory, $cursorFactory),
+            new AssetTagApi($resourceClient, $pageFactory, $cursorFactory),
+            new AssetReferenceFileApi($resourceClient, $fileSystem),
+            new AssetVariationFileApi($resourceClient, $fileSystem)
         );
 
         return $client;
