@@ -54,4 +54,20 @@ class ProductController extends \CleverAge\EAVManager\AkeneoProductBundle\Contro
 
         return $this->get(AkeneoPimClientInterface::class)->getProductApi()->get($id);
     }
+
+    /**
+     * @param Request $request
+     * @param array   $product
+     *
+     * @return array
+     */
+    protected function getFormOptions(Request $request, array $product): array
+    {
+        return array_merge(
+            parent::getFormOptions($request, $product),
+            [
+                'upload_filename_prefix' => $product['identifier'] // default filename_prefix
+            ]
+        );
+    }
 }

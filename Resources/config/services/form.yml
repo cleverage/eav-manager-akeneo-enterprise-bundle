@@ -3,13 +3,24 @@ parameters:
 
 services:
     eav_manager.akeneo.form.type.product:
-            class: '%eav_manager.akeneo.form.type.product.class%'
-            arguments:
-                - '@Akeneo\Pim\ApiClient\AkeneoPimClientInterface'
-                - '@CleverAge\EAVManager\AkeneoProductBundle\Form\Transformer\AkeneoProductTransformer'
-                - '@form.registry'
-                - '@security.authorization_checker'
-            calls:
-                - [setCache, ['@eav_manager.akeneo.api.cache']]
-            tags:
-                - { name: form.type }
+        class: '%eav_manager.akeneo.form.type.product.class%'
+        arguments:
+            - '@Akeneo\Pim\ApiClient\AkeneoPimClientInterface'
+            - '@CleverAge\EAVManager\AkeneoProductBundle\Form\Transformer\AkeneoProductTransformer'
+            - '@form.registry'
+            - '@security.authorization_checker'
+        calls:
+            - [setCache, ['@eav_manager.akeneo.api.cache']]
+        tags:
+            - { name: form.type }
+
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AssetType:
+        autowire: true
+        tags:
+            - { name: form.type }
+
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AssetCollectionType:
+        autowire: true
+        tags:
+        - { name: form.type }
+

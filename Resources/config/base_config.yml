@@ -1,0 +1,21 @@
+# one uploader
+oneup_uploader:
+    mappings:
+        product_asset:
+            frontend: custom
+            custom_frontend:
+                class: 'CleverAge\EAVManager\AkeneoEnterpriseBundle\Controller\FineUploaderController'
+                name: akeneo_blueimp
+            allowed_mimetypes: [ image/jpg, image/jpeg, image/png, image/gif ]
+            storage:
+                service: 'CleverAge\EAVManager\AkeneoEnterpriseBundle\Flysystem\Storage\ProductAssetStorage'
+            namer: 'CleverAge\EAVManager\AkeneoEnterpriseBundle\Uploader\Naming\AssetNamer'
+            error_handler: 'oneup_uploader.error_handler.blueimp'
+oneup_flysystem:
+    adapters:
+        product_asset:
+            custom:
+                service: 'CleverAge\EAVManager\AkeneoEnterpriseBundle\Flysystem\Adapter\ProductAssetAdapter'
+    filesystems:
+        product_assets:
+            adapter: product_asset

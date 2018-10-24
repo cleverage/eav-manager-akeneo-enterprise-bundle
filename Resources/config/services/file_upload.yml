@@ -1,0 +1,19 @@
+services:
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Flysystem\Adapter\ProductAssetAdapter:
+        autowire: true
+        public: true
+
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Flysystem\Storage\ProductAssetStorage:
+        public: true
+        autowire: true
+        arguments:
+            $filesystem: '@oneup_flysystem.product_assets_filesystem'
+
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Uploader\Naming\AssetNamer:
+        autowire: true
+        public: true
+
+    CleverAge\EAVManager\AkeneoEnterpriseBundle\Uploader\EventListener\AssetUploader:
+        public: false
+        tags:
+        - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
