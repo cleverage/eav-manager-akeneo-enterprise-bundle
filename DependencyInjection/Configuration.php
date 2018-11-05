@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                         ->example(['ROLE_USER', 'ROLE_ADMIN'])
                     ->end()
                 ->end()
+                ->scalarNode('public_uri')->defaultValue('%eav_manager.akeneo_product.api.base_uri%')->end()
             ->end()
         ;
 

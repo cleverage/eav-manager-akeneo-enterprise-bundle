@@ -1,4 +1,5 @@
 services:
     CleverAge\EAVManager\AkeneoEnterpriseBundle\Twig\AkeneoEnterpriseExtension:
+        autowire: true
         tags:
             - { name: twig.extension }

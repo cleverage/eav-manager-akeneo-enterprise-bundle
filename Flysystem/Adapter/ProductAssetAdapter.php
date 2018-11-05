@@ -25,16 +25,11 @@ class ProductAssetAdapter extends AbstractAdapter
         $this->client = $client;
     }
 
+    /**
+     * @todo
+     */
     public function write($assetCode, $contents, Config $config)
     {
-        try {
-            $test = $this->client->getAssetApi()->create($assetCode, [
-            ]);
-        } catch (UnprocessableEntityHttpException $e) {
-            throw new UploadException($this->generateErrorMessages($e));
-        }
-
-        throw new \Exception(json_encode($test));
     }
 
     public function writeStream($assetCode, $resource, Config $config)
@@ -112,9 +107,11 @@ class ProductAssetAdapter extends AbstractAdapter
         return true;
     }
 
-    public function read($path)
+    public function read($assetCode)
     {
-        // TODO: Implement read() method.
+        $asset = $this->client->getAssetReferenceFileApi()->downloadFromNotLocalizableAsset($assetCode);
+
+        return ['type' => 'file', 'path' => $assetCode, 'contents' => $asset->getContents()];
     }
 
     public function readStream($path)
@@ -144,9 +141,13 @@ class ProductAssetAdapter extends AbstractAdapter
         // TODO: Implement getSize() method.
     }
 
-    public function getMimetype($path)
+    public function getMimetype($assetCode)
     {
-        // TODO: Implement getMimetype() method.
+
+        $assetReponse = $this->client->getAssetReferenceFileApi()->downloadAsset($assetCode);
+        $mimetype = $assetReponse->getHeaderLine('Content-type');
+
+        return ['path' => $assetCode, 'type' => 'file', 'mimetype' => $mimetype];
     }
 
     public function getTimestamp($path)

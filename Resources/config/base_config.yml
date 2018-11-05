@@ -1,10 +1,45 @@
+imports:
+    - { resource: '@CleverAgeEAVManagerAkeneoProductBundle/Resources/config/base_config.yml' }
+
+sidus_admin:
+    configurations:
+        products:
+            controller: CleverAgeEAVManagerAkeneoEnterpriseBundle:Product
+            entity: ~
+            prefix: /products
+            actions:
+                list:
+                    path: /list
+                    template: 'CleverAgeEAVManagerAkeneoEnterpriseBundle:Product:list.html.twig'
+                edit:
+                    path: /{identifier}/edit
+                    # Form type is set dynamically at runtime
+                    template: 'CleverAgeEAVManagerAkeneoEnterpriseBundle:Product:edit.html.twig'
+                editModel:
+                    path:     /product/models/{family}/{code}/edit
+                    defaults:
+                        _controller: FrameworkBundle:Redirect:redirect
+                        route: sidus_admin.product_models.edit
+                        permanent: true
+                apiSearch:
+                    path: /_api/search/{endpoint}
+            options:
+                icon: shopping-cart
+        assets:
+            controller: CleverAgeEAVManagerAkeneoEnterpriseBundle:Asset
+            entity: ~
+            prefix: /assets
+            actions:
+                viewReferenceFile:
+                    path: /{assetCode}
+
 # one uploader
 oneup_uploader:
     mappings:
         product_asset:
             frontend: custom
             custom_frontend:
-                class: 'CleverAge\EAVManager\AkeneoEnterpriseBundle\Controller\FineUploaderController'
+                class: 'CleverAge\EAVManager\AkeneoEnterpriseBundle\Controller\BlueimpController'
                 name: akeneo_blueimp
             allowed_mimetypes: [ image/jpg, image/jpeg, image/png, image/gif ]
             storage:
@@ -19,3 +54,18 @@ oneup_flysystem:
     filesystems:
         product_assets:
             adapter: product_asset
+
+
+liip_imagine:
+    loaders:
+        assets:
+            flysystem:
+                filesystem_service: 'oneup_flysystem.product_assets_filesystem'
+
+    filter_sets:
+        asset_thumbnail:
+            data_loader: assets
+            quality: 70
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [128, 128], mode: outbound }

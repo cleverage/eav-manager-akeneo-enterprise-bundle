@@ -17,5 +17,7 @@ class CleverAgeEAVManagerAkeneoEnterpriseExtension extends ConfigurableExtension
         $loader->loadFiles(__DIR__.'/../Resources/config/services');
 
         $container->setParameter('eav_manager_akeneo_product_owners', $config['product_owners']);
+        $container->setParameter('eav_manager_akeneo_public_uri', $config['public_uri']);
+
     }
 }

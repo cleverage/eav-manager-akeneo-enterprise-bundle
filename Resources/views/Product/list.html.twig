@@ -1,0 +1,12 @@
+{% extends '@CleverAgeEAVManagerAdmin/Base/list.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/cleverageeavmanagerakeneoenterprise/css/asset_upload.css') }}" type="text/css"
+          rel="stylesheet" media="screen"/>
+{% endblock %}
+
+{% block additionnal_javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/cleverageeavmanagerakeneoenterprise/js/asset_upload.js') }}"></script>
+{% endblock %}

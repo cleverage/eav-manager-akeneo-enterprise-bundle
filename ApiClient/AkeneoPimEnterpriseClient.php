@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CleverAge\EAVManager\AkeneoEnterpriseBundle\ApiClient;
 
 use Akeneo\PimEnterprise\ApiClient\AkeneoPimEnterpriseClientInterface;

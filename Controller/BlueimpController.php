@@ -7,12 +7,11 @@ use CleverAge\EAVManager\AkeneoEnterpriseBundle\Uploader\Response\AssetResponse;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\Request;
 
-class FineUploaderController extends \Oneup\UploaderBundle\Controller\FineUploaderController
+class BlueimpController extends \Sidus\FileUploadBundle\Controller\BlueimpController
 {
     public function upload()
     {
         $request = $this->getRequest();
-        $translator = $this->container->get('translator');
 
         $response = new AssetResponse();
         $files = $this->getFiles($request->files);
@@ -24,13 +23,7 @@ class FineUploaderController extends \Oneup\UploaderBundle\Controller\FineUpload
         try {
             $this->handleUpload($file, $response, $request);
         } catch (UploadException $e) {
-            $response->setSuccess(false);
-            $response->setError($translator->trans($e->getMessage(), array(), 'OneupUploaderBundle'));
-
             $this->errorHandler->addException($response, $e);
-
-            // an error happended, return this error message.
-            return $this->createSupportedJsonResponse($response->assemble());
         }
 
         return $this->createSupportedJsonResponse($response->assemble());

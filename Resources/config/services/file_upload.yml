@@ -15,5 +15,6 @@ services:
 
     CleverAge\EAVManager\AkeneoEnterpriseBundle\Uploader\EventListener\AssetUploader:
         public: false
+        autowire: true
         tags:
         - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
