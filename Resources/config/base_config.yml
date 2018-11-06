@@ -5,7 +5,7 @@ sidus_admin:
     configurations:
         products:
             controller: CleverAgeEAVManagerAkeneoEnterpriseBundle:Product
-            entity: ~
+            entity: 'Product'
             prefix: /products
             actions:
                 list:
@@ -27,7 +27,7 @@ sidus_admin:
                 icon: shopping-cart
         assets:
             controller: CleverAgeEAVManagerAkeneoEnterpriseBundle:Asset
-            entity: ~
+            entity: 'Asset'
             prefix: /assets
             actions:
                 viewReferenceFile:
