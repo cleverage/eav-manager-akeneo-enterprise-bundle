@@ -31,6 +31,6 @@ class BlueimpController extends \Sidus\FileUploadBundle\Controller\BlueimpContro
 
     protected function createAssetCode(Request $request)
     {
-        return sprintf('%s_%s',  $request->query->get('prefix'), (new \DateTime())->getTimestamp());
+        return sprintf('%s_%s',  $request->query->get('prefix'), (new \DateTime())->format('Ymd'));
     }
 }

@@ -10,7 +10,6 @@
                     widget.find('.alert').html('').hide();
                     if (data.result.files && data.result.files[0] && data.result.files[0].error) {
                         var error = data.result.files[0].error;
-                        dump(error);
                         if (data._error_messages[error]) {
                             error = data._error_messages[error];
                         }
