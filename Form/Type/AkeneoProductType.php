@@ -5,6 +5,7 @@ namespace CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type;
 use Akeneo\Pim\ApiClient\AkeneoPimClientInterface;
 use CleverAge\EAVManager\AkeneoEnterpriseBundle\Security\Voter\ProductVoter;
 use CleverAge\EAVManager\AkeneoProductBundle\Attribute\Type\AkeneoAttributeTypes;
+use CleverAge\EAVManager\AkeneoProductBundle\Form\EventListener\AkeneoListenerFactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,9 +31,10 @@ class AkeneoProductType extends \CleverAge\EAVManager\AkeneoProductBundle\Form\T
         AkeneoPimClientInterface $client,
         DataTransformerInterface $transformer,
         FormRegistryInterface $formRegistry,
+        AkeneoListenerFactoryInterface $akeneoListenerFactory,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        parent::__construct($client, $transformer, $formRegistry);
+        parent::__construct($client, $transformer, $formRegistry, $akeneoListenerFactory);
 
         $this->authorizationChecker = $authorizationChecker;
     }

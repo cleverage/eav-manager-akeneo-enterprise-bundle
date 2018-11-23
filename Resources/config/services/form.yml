@@ -4,11 +4,9 @@ parameters:
 services:
     eav_manager.akeneo.form.type.product:
         class: '%eav_manager.akeneo.form.type.product.class%'
+        autowire: true
         arguments:
-            - '@Akeneo\Pim\ApiClient\AkeneoPimClientInterface'
-            - '@CleverAge\EAVManager\AkeneoProductBundle\Form\Transformer\AkeneoProductTransformer'
-            - '@form.registry'
-            - '@security.authorization_checker'
+            $transformer: '@CleverAge\EAVManager\AkeneoProductBundle\Form\Transformer\AkeneoProductTransformer'
         calls:
             - [setCache, ['@eav_manager.akeneo.api.cache']]
         tags:
