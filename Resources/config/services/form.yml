@@ -1,5 +1,6 @@
 parameters:
     eav_manager.akeneo.form.type.product.class: CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AkeneoProductType
+    eav_manager.akeneo.form.type.product_model.class: CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AkeneoProductModelType
 
 services:
     eav_manager.akeneo.form.type.product:

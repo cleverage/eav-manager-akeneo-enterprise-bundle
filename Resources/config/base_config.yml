@@ -13,8 +13,8 @@ sidus_admin:
                     template: 'CleverAgeEAVManagerAkeneoEnterpriseBundle:Product:list.html.twig'
                 edit:
                     path: /{identifier}/edit
-                    # Form type is set dynamically at runtime
-                    template: 'CleverAgeEAVManagerAkeneoEnterpriseBundle:Product:edit.html.twig'
+                    form_type: CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AkeneoProductType
+                    template: 'CleverAgeEAVManagerAkeneoEnterprise/Product/edit.html.twig'
                 editModel:
                     path:     /product/models/{family}/{code}/edit
                     defaults:
@@ -25,6 +25,18 @@ sidus_admin:
                     path: /_api/search/{endpoint}
             options:
                 icon: shopping-cart
+        product_models:
+            # TODO handle darft and proposal for product model
+            controller: CleverAgeEAVManagerAkeneoEnterpriseBundle:ProductModel
+            entity: ~
+            prefix: /product/models
+            actions:
+                list:
+                    path: /list
+                edit:
+                    path: /{family}/{code}/edit
+                    form_type: CleverAge\EAVManager\AkeneoEnterpriseBundle\Form\Type\AkeneoProductModelType
+                    template: '@CleverAgeEAVManagerAkeneoEnterpriseBundle/Product/edit.html.twig'
         assets:
             controller: CleverAgeEAVManagerAkeneoEnterpriseBundle:Asset
             entity: 'Asset'

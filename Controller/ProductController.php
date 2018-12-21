@@ -66,7 +66,7 @@ class ProductController extends \CleverAge\EAVManager\AkeneoProductBundle\Contro
         return array_merge(
             parent::getFormOptions($request, $product),
             [
-                'upload_filename_prefix' => $product['identifier'] // default filename_prefix
+                'upload_filename_prefix' => $product['identifier'] ?? null // default filename_prefix
             ]
         );
     }
