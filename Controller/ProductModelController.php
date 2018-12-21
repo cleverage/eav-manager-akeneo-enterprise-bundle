@@ -31,7 +31,7 @@ class ProductModelController extends ProductController
         $data['id'] = $data['identifier'] = $code; // Just a little hack to allow reuse of existing templates
         $data['family'] = $request->get('family');
         $form = $this->getForm($request, $data, $this->getFormOptions($request, $data));
-        dump($form);
+        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->handleForm($request, $form);
